@@ -6,7 +6,7 @@ import { spawn } from 'node:child_process'
 const root = fileURLToPath(new URL('..', import.meta.url))
 async function testFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true })
-  const files = await Promise.all(entries.map(entry => {
+  const files = await Promise.all(entries.filter(entry => !['node_modules', 'dist', '.git'].includes(entry.name)).map(entry => {
     const path = resolve(directory, entry.name)
     if (entry.isDirectory()) return testFiles(path)
     return /\.test\.[cm]?[jt]sx?$/.test(entry.name) ? [path] : []
@@ -26,8 +26,8 @@ const env = {
   LLM_BASE_URL: 'http://127.0.0.1:1/v1',
 }
 const groups = [
-  ['backend/shared', [resolve(root, 'packages/backend/src'), resolve(root, 'packages/shared/src')]],
-  ['frontend', [resolve(root, 'packages/frontend/test')]],
+  ['backend/shared', [resolve(root, 'packages/backend'), resolve(root, 'packages/shared')]],
+  ['frontend', [resolve(root, 'packages/frontend')]],
 ]
 for (const [name, directories] of groups) {
   const files = (await Promise.all(directories.map(testFiles))).flat()

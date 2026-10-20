@@ -20,7 +20,7 @@ test('feature profiles resolve expected defaults', () => {
   assert.equal(isFeatureEnabled(dev, 'llmContextDashboard'), true)
   assert.equal(isFeatureEnabled(dev, 'chatTtsControl'), true)
   assert.equal(isFeatureEnabled(dev, 'nativeDebugEntry'), true)
-  assert.equal(isFeatureEnabled(dev, 'h5AppDownloadBanner'), true)
+  assert.equal(isFeatureEnabled(dev, 'h5AppDownloadBanner'), false)
   assert.equal(isFeatureEnabled(sit, 'agentScheduledTasks'), true)
   assert.equal(isFeatureEnabled(sit, 'interventionCompletionReminderOffer'), true)
   assert.equal(isFeatureEnabled(sit, 'checkInRecords'), true)
@@ -29,7 +29,7 @@ test('feature profiles resolve expected defaults', () => {
   assert.equal(isFeatureEnabled(sit, 'llmContextDashboard'), false)
   assert.equal(isFeatureEnabled(sit, 'chatTtsControl'), true)
   assert.equal(isFeatureEnabled(sit, 'nativeDebugEntry'), false)
-  assert.equal(isFeatureEnabled(sit, 'h5AppDownloadBanner'), true)
+  assert.equal(isFeatureEnabled(sit, 'h5AppDownloadBanner'), false)
   assert.equal(isFeatureEnabled(prod, 'healthEducationPlaza'), false)
   assert.equal(isFeatureEnabled(prod, 'myDoctorEntry'), false)
   assert.equal(isFeatureEnabled(prod, 'healthEducationFavorites'), false)
@@ -40,7 +40,7 @@ test('feature profiles resolve expected defaults', () => {
   assert.equal(isFeatureEnabled(prod, 'llmContextDashboard'), false)
   assert.equal(isFeatureEnabled(prod, 'chatTtsControl'), true)
   assert.equal(isFeatureEnabled(prod, 'nativeDebugEntry'), false)
-  assert.equal(isFeatureEnabled(prod, 'h5AppDownloadBanner'), true)
+  assert.equal(isFeatureEnabled(prod, 'h5AppDownloadBanner'), false)
 })
 
 test('doctor subject enables my doctor entry', () => {

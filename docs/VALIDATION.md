@@ -4,13 +4,13 @@ Verified locally with Node.js 26.0.0, pnpm 11.21.0 and PostgreSQL 16 (pgvector i
 
 - Frozen-lockfile dependency installation completed.
 - `pnpm build`: passed for shared, backend and frontend.
-- `pnpm test`: 597 passing tests (540 backend/shared + 57 frontend), no failures or skips.
+- `pnpm test`: 625 passing tests across all 111 retained test files (553 backend/shared + 72 frontend), no failures or skips.
 - Unconfigured doctor/RAG integrations have no built-in URL or credential. Regression tests verify unconfigured RAG performs no network request.
 - `pnpm db:generate`: a second run reports no schema changes.
 - Fresh database migration: one baseline applied; all 49 tables checked column by column, including vector and pg_trgm extensions.
 - Backend health and H5 client-experience proxy: HTTP 200.
 - Browser verification: neutral branding, demo notice and data-handling notice render correctly. No agreement accepted or real user data entered for this check.
-- Publication pattern check and Gitleaks 8.30.1 scan of distributable source: passed. Company/brand and internal-address review found no remaining original identifiers in the selected source files.
+- Publication pattern check and Gitleaks 8.30.1 scans of distributable source and the new Git history: passed. Company/brand and internal-address review found no remaining original identifiers in the selected source files.
 - The source checkout was left unchanged. The new repository contains no old Git history or remote configuration.
 
 ## Scope and remaining review
