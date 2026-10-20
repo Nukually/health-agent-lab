@@ -1,0 +1,14 @@
+export const FIRST_ACTIVATION_WELCOME_GREETING = '你好，我是演示助手，很高兴认识你。'
+export const FIRST_ACTIVATION_WELCOME_ROLE_DESCRIPTION = '我是你的乳腺健康管家，可以陪你一起整理健康资料、看懂报告、记录身体变化，也能在你不舒服或有疑问的时候，帮你更快理清情况。'
+export const FIRST_ACTIVATION_WELCOME_SUGGESTION = '第一次使用，建议你先花一点时间建立健康档案。'
+export const FIRST_ACTIVATION_WELCOME_QUESTION_PRIMARY = '你目前最想关注或解决的问题是什么？'
+export const FIRST_ACTIVATION_WELCOME_QUESTION_MEDICATION = '如果你现在有在用药，也可以告诉我是什么药、吃了多久。'
+export const FIRST_ACTIVATION_WELCOME_UPLOAD_HINT = '如果你手边有检查报告、病历、出院记录、体检报告或用药单的图片，也可以直接发送给我，我会先帮你整理关键信息，后面给你的帮助会更贴合你的情况。'
+
+export const FIRST_ACTIVATION_WELCOME_MESSAGE = [
+  FIRST_ACTIVATION_WELCOME_GREETING,
+  FIRST_ACTIVATION_WELCOME_ROLE_DESCRIPTION,
+  FIRST_ACTIVATION_WELCOME_SUGGESTION,
+  `${FIRST_ACTIVATION_WELCOME_QUESTION_PRIMARY}\n${FIRST_ACTIVATION_WELCOME_QUESTION_MEDICATION}`,
+  FIRST_ACTIVATION_WELCOME_UPLOAD_HINT,
+].join('\n\n')

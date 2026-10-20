@@ -1,0 +1,9 @@
+Health Agent Lab
+
+An independent technical demonstration of an agent backend and H5 client.
+This distribution excludes hosted service accounts, user data, private deployment
+configuration, branded media, native SDK binaries, and external knowledge corpora.
+
+The Apache-2.0 license covers the code distributed by this project. Third-party
+dependencies retain their original copyright notices and license terms. No right
+to a third party's trademarks, content, infrastructure or hosted service is granted.

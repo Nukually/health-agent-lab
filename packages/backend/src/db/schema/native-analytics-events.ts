@@ -1,0 +1,45 @@
+import { pgTable, uuid, varchar, integer, timestamp, jsonb, index, uniqueIndex } from 'drizzle-orm/pg-core'
+import type { NativeAnalyticsEventName, NativeAnalyticsPlatform } from '@health-agent/shared'
+import { users } from './users.js'
+
+export const nativeAnalyticsEvents = pgTable(
+  'native_analytics_events',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    installId: varchar('install_id', { length: 120 }).notNull(),
+    userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
+    eventName: varchar('event_name', { length: 80 }).$type<NativeAnalyticsEventName>().notNull(),
+    dedupeKey: varchar('dedupe_key', { length: 180 }),
+    entityType: varchar('entity_type', { length: 80 }),
+    entityId: varchar('entity_id', { length: 160 }),
+    platform: varchar('platform', { length: 20 }).$type<NativeAnalyticsPlatform>().notNull(),
+    appVersion: varchar('app_version', { length: 80 }),
+    versionCode: varchar('version_code', { length: 80 }),
+    buildNumber: varchar('build_number', { length: 80 }),
+    channel: varchar('channel', { length: 80 }),
+    osVersion: varchar('os_version', { length: 80 }),
+    sdkInt: integer('sdk_int'),
+    manufacturer: varchar('manufacturer', { length: 120 }),
+    model: varchar('model', { length: 120 }),
+    webViewVersion: varchar('webview_version', { length: 160 }),
+    bridgeVersion: varchar('bridge_version', { length: 40 }),
+    bridgeModules: jsonb('bridge_modules').$type<string[]>(),
+    geoSource: varchar('geo_source', { length: 40 }),
+    geoCountry: varchar('geo_country', { length: 80 }),
+    geoProvince: varchar('geo_province', { length: 120 }),
+    geoCity: varchar('geo_city', { length: 120 }),
+    geoPrecision: varchar('geo_precision', { length: 40 }),
+    startedAt: timestamp('started_at', { withTimezone: true }),
+    endedAt: timestamp('ended_at', { withTimezone: true }),
+    durationMs: integer('duration_ms'),
+    properties: jsonb('properties').$type<Record<string, unknown>>(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex('uniq_native_analytics_install_name_dedupe').on(table.installId, table.eventName, table.dedupeKey),
+    index('idx_native_analytics_install_created').on(table.installId, table.createdAt),
+    index('idx_native_analytics_user_created').on(table.userId, table.createdAt),
+    index('idx_native_analytics_name_created').on(table.eventName, table.createdAt),
+    index('idx_native_analytics_platform_created').on(table.platform, table.createdAt),
+  ],
+)

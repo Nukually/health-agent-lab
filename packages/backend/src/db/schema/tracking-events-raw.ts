@@ -1,0 +1,42 @@
+import { pgTable, uuid, varchar, timestamp, jsonb, index, uniqueIndex } from 'drizzle-orm/pg-core'
+import type { TrackingEventPlatform, TrackingEventSource } from '@health-agent/shared'
+
+export const trackingEventsRaw = pgTable(
+  'tracking_events_raw',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    eventId: varchar('event_id', { length: 120 }).notNull(),
+    eventName: varchar('event_name', { length: 120 }).notNull(),
+    eventVersion: varchar('event_version', { length: 40 }).notNull(),
+    source: varchar('source', { length: 40 }).$type<TrackingEventSource>().notNull(),
+    platform: varchar('platform', { length: 40 }).$type<TrackingEventPlatform>(),
+    installId: varchar('install_id', { length: 120 }),
+    userId: uuid('user_id'),
+    appSessionId: varchar('app_session_id', { length: 120 }),
+    webSessionId: varchar('web_session_id', { length: 120 }),
+    traceId: varchar('trace_id', { length: 120 }),
+    requestId: varchar('request_id', { length: 120 }),
+    chatSessionId: uuid('chat_session_id'),
+    entityType: varchar('entity_type', { length: 80 }),
+    entityId: varchar('entity_id', { length: 160 }),
+    route: varchar('route', { length: 240 }),
+    appVersion: varchar('app_version', { length: 80 }),
+    buildNumber: varchar('build_number', { length: 80 }),
+    channel: varchar('channel', { length: 80 }),
+    eventTime: timestamp('event_time', { withTimezone: true }).notNull(),
+    receiveTime: timestamp('receive_time', { withTimezone: true }).notNull().defaultNow(),
+    properties: jsonb('properties').$type<Record<string, unknown>>(),
+    rawPayload: jsonb('raw_payload').$type<Record<string, unknown>>(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex('uniq_tracking_events_raw_event_id').on(table.eventId),
+    index('idx_tracking_events_raw_name_time').on(table.eventName, table.eventTime),
+    index('idx_tracking_events_raw_user_time').on(table.userId, table.eventTime),
+    index('idx_tracking_events_raw_install_time').on(table.installId, table.eventTime),
+    index('idx_tracking_events_raw_app_session_time').on(table.appSessionId, table.eventTime),
+    index('idx_tracking_events_raw_trace_time').on(table.traceId, table.eventTime),
+    index('idx_tracking_events_raw_request_time').on(table.requestId, table.eventTime),
+    index('idx_tracking_events_raw_created_at').on(table.createdAt),
+  ],
+)

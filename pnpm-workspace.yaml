@@ -1,0 +1,7 @@
+packages:
+  - 'packages/*'
+allowBuilds:
+  '@alicloud/openapi-core': true
+  esbuild: true
+  protobufjs: true
+  sharp: true

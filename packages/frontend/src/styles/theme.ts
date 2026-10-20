@@ -1,0 +1,41 @@
+export const theme = {
+  colors: {
+    primary: '#FF6B6B',
+    primaryLight: '#FF8E8E',
+    primaryDark: '#E85555',
+    primaryBg: '#FFF5F5',
+    primaryGradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+    bg: '#FFFFFF',
+    surface: '#F8F9FA',
+    shellBg: '#F0F0F5',
+    text: '#333333',
+    textSecondary: '#666666',
+    textMuted: '#999999',
+    border: '#E8E8E8',
+    thinking: '#888888',
+  },
+  spacing: {
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+  },
+  radius: {
+    sm: '8px',
+    md: '12px',
+    lg: '16px',
+    full: '9999px',
+  },
+  shadows: {
+    phone: '0 0 0 1px rgba(0,0,0,0.05), 0 25px 80px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.08)',
+    bubbleAssistant: '0 1px 6px rgba(0,0,0,0.06)',
+    bubbleUser: '0 1px 4px rgba(255,107,107,0.2)',
+    header: '0 2px 8px rgba(255,107,107,0.15)',
+  },
+  layout: {
+    maxWidth: 430,
+    headerHeight: 56,
+    phoneRadius: 44,
+  },
+} as const

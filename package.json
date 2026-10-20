@@ -1,0 +1,19 @@
+{
+  "name": "health-agent-lab",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:backend": "pnpm --filter @health-agent/backend dev",
+    "dev:frontend": "pnpm --filter @health-agent/frontend dev",
+    "build": "pnpm --filter @health-agent/shared build && pnpm -r --parallel --filter @health-agent/backend --filter @health-agent/frontend build",
+    "db:generate": "pnpm --filter @health-agent/backend db:generate",
+    "db:migrate": "pnpm --filter @health-agent/backend db:migrate",
+    "test": "pnpm --filter @health-agent/shared build && node scripts/test.mjs",
+    "check:publication": "node scripts/check-publication.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@11.21.0"
+}
