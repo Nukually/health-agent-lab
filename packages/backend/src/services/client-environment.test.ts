@@ -7,13 +7,13 @@ test('client environment preserves actual UI release hints', () => {
     hint: {
       platform: 'chrome',
       source: 'navigator',
-      uiReleaseId: 'main-20260524',
-      uiVariant: 'legacy-20260524',
+      uiReleaseId: 'current',
+      uiVariant: 'default',
       userAgent: 'Mozilla/5.0 Chrome/126.0',
     },
   })
 
   assert.equal(env.platform, 'chrome')
-  assert.equal(env.uiReleaseId, 'main-20260524')
-  assert.equal(env.uiVariant, 'legacy-20260524')
+  assert.equal(env.uiReleaseId, 'current')
+  assert.equal(env.uiVariant, 'default')
 })

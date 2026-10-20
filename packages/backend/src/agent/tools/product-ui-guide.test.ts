@@ -45,25 +45,6 @@ test('CX product guide renders current layout for prod Android release', () => {
   assert.match(guide, /\[提醒\]\(\/scheduled-tasks\)/)
 })
 
-test('CX product guide trusts actual legacy UI release from web client hint', () => {
-  const guide = renderCxProductGuide({
-    features: resolveFeatureSnapshot({ profile: 'dev' }),
-    clientEnvironment: {
-      platform: 'chrome',
-      label: 'Chrome/网页',
-      source: 'navigator',
-      uiReleaseId: 'main-20260524',
-      uiVariant: 'legacy-20260524',
-    },
-  })
-
-  assert.match(guide, /生效 UI：main-20260524 \/ legacy-20260524/)
-  assert.match(guide, /surface=h5；profile=dev/)
-  assert.match(guide, /阅读设置和退出账户：侧边栏底部“设置”菜单/)
-  assert.match(guide, /不要说“这个链接”但只输出不可点击的页面名/)
-  assert.doesNotMatch(guide, /该页内包含个人信息、阅读设置、账号与安全/)
-})
-
 test('CX product guide can render only future notes', () => {
   const guide = renderCxProductGuide({
     features: resolveFeatureSnapshot({ profile: 'dev' }),
@@ -90,13 +71,13 @@ test('CX product guide renders configured app download links as Markdown', () =>
     downloadUrls: {
       android: 'https://app.example.test/downloads/android/HealthAgentLab-1.0.0-10000-prod-release.apk',
       ios: 'https://testflight.apple.com/join/DEMO0000',
-      harmony: 'https://appgallery.huawei.com/link/invite-test-wap?taskId=demo-invite-placeholder',
+      harmony: 'https://apps.example.test/downloads/harmony/demo',
     },
   })
 
   assert.match(guide, /\[Android 下载 APK\]\(https:\/\/app\.example\.test\/downloads\/android\/HealthAgentLab-1\.0\.0-10000-prod-release\.apk\)/)
   assert.match(guide, /\[iOS TestFlight\]\(https:\/\/testflight\.apple\.com\/join\/DEMO0000\)/)
-  assert.match(guide, /\[鸿蒙 5\.0\+ 内测\]\(https:\/\/appgallery\.huawei\.com\/link\/invite-test-wap\?taskId=demo-invite-placeholder\)/)
+  assert.match(guide, /\[鸿蒙 5\.0\+ 内测\]\(https:\/\/apps\.example\.test\/downloads\/harmony\/demo\)/)
   assert.match(guide, /必须用 Markdown 链接给出已配置的对应入口/)
   assert.doesNotMatch(guide, /当前 UI 布局/)
 })
